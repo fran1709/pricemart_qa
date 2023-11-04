@@ -1,4 +1,4 @@
-describe('Costa Rica - Español', function () {
+describe('Comprobación de idioma', function () {
     beforeEach(function () {
         Cypress.on('uncaught:exception', (err, runnable) => {
             return false
@@ -51,7 +51,7 @@ describe('Costa Rica - Español', function () {
         cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/ul/li[1]/a').click();
         cy.xpath('/html/body/section/section/div/div/div[4]/div/div/div/div/div[5]/a/div/div/div').click();
         cy.get('#hero-banner > div.banner-main-cont.banner-centered.p-3.p-md-5 > section > div > div.banner-cont-body.col-12 > div').contains('Might find your new favorites');
-    })
+    });
 
     it('Inicio de sesión en Inglés', () => {
         // Verificar si la página contiene el texto "Sign in to get the most from your membership"
@@ -61,5 +61,63 @@ describe('Costa Rica - Español', function () {
         cy.get('#dropdownMenuButton > img').click();
         cy.get('#login-button').click();
         cy.get('#marketplace-login-box > p:nth-child(3)').contains('Sign in to get the most from your membership');
-    })
+    });
+
+    it('Página Principal en Español', () => {
+        // Verificar si la página contiene el texto "Explorá Nuestras Categorías Destacadas"
+        cy.visit('https://www.pricesmart.com/site/cr/es');
+        cy.xpath('/html/body/section/section/div/div/div[3]/div/div/section/div/div[1]/div/div/div/h2').contains('Explorá Nuestras Categorías Destacadas');
+    });
+
+    it('Selección de países en Español', () => {
+        // Verificar si la página contiene el texto "Con presencia en 13 países y la confianza de millones de personas."
+        cy.visit('https://www.pricesmart.com/site/es/seleccionar-pais');
+        cy.xpath('/html/body/section/section/section[1]/div/div[3]/p').contains('Con presencia en 13 países y la confianza de millones de personas.');
+    });
+
+    it('Productos y Categorías en Español', () => {
+        
+    });
+});
+
+describe('Cambio de idioma disponible en Español', function () {
+    beforeEach(function () {
+        Cypress.on('uncaught:exception', (err, runnable) => {
+            return false
+        })
+        cy.viewport('iphone-x')  
+        
+    });
+
+    afterEach(function () {
+        cy.reload();
+    });
+
+    it('Página Principal', () => {
+        cy.visit('https://www.pricesmart.com/site/cr/es');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').should('be.visible');
+    });
+
+    it('Lo nuevo', () => {
+        cy.visit('https://www.pricesmart.com/site/cr/es/lo-nuevo');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').should('be.visible');
+    });
+
+    it('Selección de países', () => {
+        cy.visit('https://www.pricesmart.com/site/es/seleccionar-pais');
+        cy.xpath('/html/body/section/section/section[1]/div/div[1]/div/li/div/button').should('be.visible');
+
+    });
+
+    it('Compra de la membresía', () => {
+        cy.visit('https://www.pricesmart.com/site/cr/es/membrecia');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').should('be.visible');
+    });
+
+    it('Beneficios de la membresía', () => {
+        cy.visit('https://www.pricesmart.com/site/cr/es/beneficios-membrecia');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').should('be.visible');
+
+    });
+    
 });
