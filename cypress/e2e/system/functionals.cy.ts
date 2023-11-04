@@ -34,4 +34,32 @@ describe('Costa Rica - Español', function () {
         cy.get('#home > div > div > div:nth-child(2) > div.row > div > div > div > div > div > div > h3')
         .should('be.visible').contains('CONTINUAR COMPRANDO');
     })
+
+    it('Selección de Clubes en Inglés', () =>{
+        // Verificar si la página contiene el texto "Select a preferred club"
+        cy.visit('https://www.pricesmart.com/site/cr/es');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').click();
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/ul/li[1]/a').click();
+        cy.get('button[id="clubLocationHeader"]').click();
+        cy.get('#clubLocationPickerLabel').contains(' Select a preferred club ')
+    }); 
+
+    it('Sección de Lo nuevo en Inglés', () => {
+        // Verificar si la página contiene el texto "Might find your new favorites"
+        cy.visit('https://www.pricesmart.com/site/cr/es');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').click();
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/ul/li[1]/a').click();
+        cy.xpath('/html/body/section/section/div/div/div[4]/div/div/div/div/div[5]/a/div/div/div').click();
+        cy.get('#hero-banner > div.banner-main-cont.banner-centered.p-3.p-md-5 > section > div > div.banner-cont-body.col-12 > div').contains('Might find your new favorites');
+    })
+
+    it('Inicio de sesión en Inglés', () => {
+        // Verificar si la página contiene el texto "Sign in to get the most from your membership"
+        cy.visit('https://www.pricesmart.com/site/cr/es');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').click();
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/ul/li[1]/a').click();
+        cy.get('#dropdownMenuButton > img').click();
+        cy.get('#login-button').click();
+        cy.get('#marketplace-login-box > p:nth-child(3)').contains('Sign in to get the most from your membership');
+    })
 });
