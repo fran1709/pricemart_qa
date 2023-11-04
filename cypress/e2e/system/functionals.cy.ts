@@ -76,7 +76,11 @@ describe('Comprobación de idioma', function () {
     });
 
     it('Productos y Categorías en Español', () => {
-        
+        // Verificar si la página contiene el texto "Electrónicos."
+        cy.visit('https://www.pricesmart.com/site/cr/es');
+        cy.get('.navbar-toggler-icon').click();
+        cy.get('#categories-dropdown > .btn').click();
+        cy.get('#Electrónicos').contains('Electrónicos');
     });
 });
 
