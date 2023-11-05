@@ -125,3 +125,44 @@ describe('Cambio de idioma disponible en Español', function () {
     });
     
 });
+
+describe('Cambio de idioma disponible en Inglés', function () {
+    beforeEach(function () {
+        Cypress.on('uncaught:exception', (err, runnable) => {
+            return false
+        })
+        cy.viewport('iphone-x')  
+        
+    });
+
+    afterEach(function () {
+        cy.reload();
+    });
+
+    it('Página Principal', () => {
+        cy.visit('https://www.pricesmart.com/site/cr/en');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').should('be.visible');
+    });
+
+    it('Lo nuevo', () => {
+        cy.visit('https://www.pricesmart.com/site/cr/en/new-arrivals');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').should('be.visible');
+    });
+
+    it('Selección de países', () => {
+        cy.visit('https://www.pricesmart.com/site/en/country-picker');
+        cy.xpath('/html/body/section/section/section[1]/div/div[1]/div/li/div/button').should('be.visible');
+
+    });
+
+    it('Compra de la membresía', () => {
+        cy.visit('https://www.pricesmart.com/site/cr/en/membership');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').should('be.visible');
+    });
+
+    it('Beneficios de la membresía', () => {
+        cy.visit('https://www.pricesmart.com/site/cr/en/membership-benefits');
+        cy.xpath('/html/body/section/section/section[2]/footer/div/div[3]/div/div/div[2]/button').should('be.visible');
+
+    });
+});

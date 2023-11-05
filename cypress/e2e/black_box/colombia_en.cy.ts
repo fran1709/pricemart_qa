@@ -21,6 +21,8 @@ describe('Colombia - Inglés', function () {
         cy.xpath('/html/body/section/section/div/div/div[2]/div[1]/div/div/div/div/div/div/a/p/u').click().then(function (){
             cy.wait(200);
         })
+        // Verifica que el valor numerico del carrito sea 0
+        cy.get('section nav section div div div:nth-child(5) ul li div div span').should('contain', '0');
         cy.reload();
     });
     it('Caso de Prueba #9', function(){

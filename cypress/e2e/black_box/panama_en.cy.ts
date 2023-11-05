@@ -5,10 +5,13 @@ describe('Panamá - Inglés', function () {
         })
         cy.viewport('iphone-x')  
         cy.visit('https://www.pricesmart.com/site/en/country-picker');
-         
-        //Vista seleccionar Pais.
-        cy.xpath('/html/body/section/section/section[1]/div/div[5]/div/div/div[1]/div/ul/li[5]/a').click().then(function () {            
-            cy.wait(200);
+        // Seleccion de pais
+        cy.xpath('/html/body/section/section/section[1]/div/div[5]/div/div/div[1]/div/ul/li[5]/a/div[2]').then(element => {
+            if (Cypress.$(element).text().includes('Panamá')) {
+                cy.wrap(element).click();
+            } else {
+                cy.xpath('/html/body/section/section/section[1]/div/div[5]/div/div/div[1]/div/ul/li[6]/a').click();
+            }
         });
         //Selecciona cambiar de club
         cy.get('button[id="clubLocationHeader"]').click().then(function () {
@@ -21,6 +24,8 @@ describe('Panamá - Inglés', function () {
         cy.xpath('/html/body/section/section/div/div/div[2]/div[1]/div/div/div/div/div/div/a/p/u').wait(200).click().then(function (){
             cy.wait(200);
         })
+        // Verifica que el valor numerico del carrito sea 0
+        cy.get('section nav section div div div:nth-child(5) ul li div div span').should('contain', '0');
         cy.reload();
     });
     
